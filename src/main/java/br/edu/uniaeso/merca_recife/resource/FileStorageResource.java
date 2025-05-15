@@ -16,11 +16,11 @@ import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api/files")
-public class FileStorageController {
+public class FileStorageResource {
 
     private final Path fileStorageLocation;
 
-    public FileStorageController(FileStorageProperties fileStorageProperties) {
+    public FileStorageResource(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
     }
