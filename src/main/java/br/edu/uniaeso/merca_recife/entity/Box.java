@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "tb_box")
 public class Box {
+
     @Id
     private Long id;
 

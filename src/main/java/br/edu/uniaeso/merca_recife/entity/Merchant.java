@@ -1,7 +1,6 @@
 package br.edu.uniaeso.merca_recife.entity;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
