@@ -8,6 +8,7 @@ import java.util.List;
 public class Market {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER)

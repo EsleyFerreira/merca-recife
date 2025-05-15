@@ -1,7 +1,7 @@
 package br.edu.uniaeso.merca_recife.service.impl;
 
 import br.edu.uniaeso.merca_recife.entity.Merchant;
-import br.edu.uniaeso.merca_recife.repository.MerchantRepositoy;
+import br.edu.uniaeso.merca_recife.repository.MerchantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,30 +13,30 @@ import java.util.Optional;
 public class MerchantServiceImpl implements br.edu.uniaeso.merca_recife.service.MerchantService {
 
     @Autowired
-    private MerchantRepositoy merchantRepositoy;
+    private MerchantRepository merchantRepository;
 
     @Override
     @Transactional
     public Merchant save(Merchant merchant) {
-        return merchantRepositoy.save(merchant);
+        return merchantRepository.save(merchant);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Merchant> findAll() {
-        return merchantRepositoy.findAll();
+        return merchantRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<Merchant> findById(Long id) {
-        return merchantRepositoy.findById(id);
+        return merchantRepository.findById(id);
     }
 
     @Override
     @Transactional
     public Merchant update(Long id, Merchant merchantDetails) {
-        Merchant existingMerchant = merchantRepositoy.findById(id)
+        Merchant existingMerchant = merchantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Merchant not found with id: " + id));
 
         if (merchantDetails.getName() != null) {
@@ -57,15 +57,15 @@ public class MerchantServiceImpl implements br.edu.uniaeso.merca_recife.service.
             existingMerchant.setOwnedBoxes(merchantDetails.getOwnedBoxes());
         }
 
-        return merchantRepositoy.save(existingMerchant);
+        return merchantRepository.save(existingMerchant);
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        if (!merchantRepositoy.existsById(id)) {
+        if (!merchantRepository.existsById(id)) {
             throw new RuntimeException("Merchant not found with id: " + id + " for deletion.");
         }
-        merchantRepositoy.deleteById(id);
+        merchantRepository.deleteById(id);
     }
 }

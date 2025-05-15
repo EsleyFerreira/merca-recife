@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Box {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
