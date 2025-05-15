@@ -14,7 +14,7 @@ public class Box {
     @JoinColumn(name = "market_id", referencedColumnName = "id", nullable = false, updatable = false)
     private Market market;
 
-    @Column(columnDefinition = "BINARY LARGE OBJECT")
+    @Column(columnDefinition = "BYTEA")
     private byte[] image;
 
     public Long getId() {
