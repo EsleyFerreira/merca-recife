@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/merchants")
-public class MerchantController {
+public class MerchantResource {
 
     @Autowired
     private MerchantService merchantService;
