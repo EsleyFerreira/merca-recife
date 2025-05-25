@@ -1,7 +1,8 @@
 package br.edu.uniaeso.merca_recife.resource;
 
-
+import br.edu.uniaeso.merca_recife.dto.BoxDTO;
 import br.edu.uniaeso.merca_recife.entity.Box;
+import br.edu.uniaeso.merca_recife.mapper.BoxMapper;
 import br.edu.uniaeso.merca_recife.service.BoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/boxes")
@@ -18,29 +20,39 @@ public class BoxResource {
     private BoxService boxService;
 
     @PostMapping
-    public ResponseEntity<Box> createBox(@RequestBody Box box) {
+    public ResponseEntity<BoxDTO> createBox(@RequestBody BoxDTO boxDTO) {
+
+        Box box = BoxMapper.toEntity(boxDTO);
         Box savedBox = boxService.save(box);
-        return new ResponseEntity<>(savedBox, HttpStatus.CREATED);
+
+        return new ResponseEntity<>(BoxMapper.toDTO(savedBox), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Box>> getAllBoxes() {
+    public ResponseEntity<List<BoxDTO>> getAllBoxes() {
         List<Box> boxes = boxService.findAll();
-        return ResponseEntity.ok(boxes);
+
+        List<BoxDTO> boxDTOs = boxes.stream()
+                .map(BoxMapper::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(boxDTOs);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Box> getBoxById(@PathVariable Long id) {
+    public ResponseEntity<BoxDTO> getBoxById(@PathVariable Long id) {
         return boxService.findById(id)
+                .map(BoxMapper::toDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Box> updateBox(@PathVariable Long id, @RequestBody Box boxDetails) {
+    public ResponseEntity<BoxDTO> updateBox(@PathVariable Long id, @RequestBody BoxDTO boxDTO) {
         try {
+            Box boxDetails = BoxMapper.toEntity(boxDTO);
             Box updatedBox = boxService.update(id, boxDetails);
-            return ResponseEntity.ok(updatedBox);
+
+            return ResponseEntity.ok(BoxMapper.toDTO(updatedBox));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
