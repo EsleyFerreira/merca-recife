@@ -51,6 +51,9 @@ public class MerchantServiceImpl implements br.edu.uniaeso.merca_recife.service.
         if (merchantDetails.getContact() != null) {
             existingMerchant.setContact(merchantDetails.getContact());
         }
+        if (merchantDetails.getProductsSold() != null) {
+            existingMerchant.setProductsSold(merchantDetails.getProductsSold());
+        }
         existingMerchant.setApproved(merchantDetails.isApproved());
 
         if (merchantDetails.getOwnedBoxes() != null) {

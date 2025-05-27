@@ -11,6 +11,7 @@ public class MerchantMapper {
         if (merchant == null) {
             return null;
         }
+
         MerchantDTO dto = new MerchantDTO();
         dto.setId(merchant.getId());
         dto.setName(merchant.getName());
@@ -18,9 +19,9 @@ public class MerchantMapper {
         dto.setEmail(merchant.getEmail());
         dto.setContact(merchant.getContact());
         dto.setApproved(merchant.isApproved());
+        dto.setProductsSold(merchant.getProductsSold());
 
         if (merchant.getOwnedBoxes() != null) {
-
             dto.setOwnedBoxes(
                     merchant.getOwnedBoxes().stream()
                             .map(BoxMapper::toDTO)
@@ -36,6 +37,7 @@ public class MerchantMapper {
         if (dto == null) {
             return null;
         }
+
         Merchant merchant = new Merchant();
         merchant.setId(dto.getId());
         merchant.setName(dto.getName());
@@ -43,9 +45,9 @@ public class MerchantMapper {
         merchant.setEmail(dto.getEmail());
         merchant.setContact(dto.getContact());
         merchant.setApproved(dto.isApproved());
+        merchant.setProductsSold(dto.getProductsSold());
 
         if (dto.getOwnedBoxes() != null) {
-
             merchant.setOwnedBoxes(
                     dto.getOwnedBoxes().stream()
                             .map(BoxMapper::toEntity)

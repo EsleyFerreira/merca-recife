@@ -16,6 +16,11 @@ public class Merchant {
     private String contact;
     private boolean approved;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "tb_merchant_pruducts_sold", joinColumns = @JoinColumn(name = "merchant_id"))
+    @Column(name = "product_name")
+    private List<String> productsSold;
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_mechant_boxes",
@@ -28,15 +33,17 @@ public class Merchant {
     public Merchant() {
     }
 
-    public Merchant(Long id, String name, String cpf, String email, String contact, boolean approved, List<Box> ownedBoxes) {
+    public Merchant(Long id, String name, String cpf, String email, String contact, boolean approved, List<String> productsSold, List<Box> ownedBoxes) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.email = email;
         this.contact = contact;
         this.approved = approved;
+        this.productsSold = productsSold;
         this.ownedBoxes = ownedBoxes;
     }
+
 
     public String getName() {
         return name;
@@ -68,6 +75,14 @@ public class Merchant {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public List<String> getProductsSold() {
+        return productsSold;
+    }
+
+    public void setProductsSold(List<String> productsSold) {
+        this.productsSold = productsSold;
     }
 
     public List<Box> getOwnedBoxes() {
