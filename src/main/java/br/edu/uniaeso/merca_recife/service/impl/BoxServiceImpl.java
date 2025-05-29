@@ -1,16 +1,12 @@
 package br.edu.uniaeso.merca_recife.service.impl;
 
 import br.edu.uniaeso.merca_recife.entity.Box;
-
 import br.edu.uniaeso.merca_recife.repository.BoxRepository;
 import br.edu.uniaeso.merca_recife.service.BoxService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +19,7 @@ public class BoxServiceImpl implements BoxService {
     @Override
     @Transactional
     public Box save(Box box) {
+
         return boxRepository.save(box);
     }
 
@@ -47,6 +44,14 @@ public class BoxServiceImpl implements BoxService {
         if (boxDetails.getImage() != null) {
             existingBox.setImage(boxDetails.getImage());
         }
+
+        if (boxDetails.getProducts() != null) {
+
+            existingBox.setProducts(new ArrayList<>(boxDetails.getProducts()));
+        } else {
+            existingBox.setProducts(new ArrayList<>());
+        }
+
         return boxRepository.save(existingBox);
     }
 
@@ -59,4 +64,3 @@ public class BoxServiceImpl implements BoxService {
         boxRepository.deleteById(id);
     }
 }
-
