@@ -5,3 +5,12 @@ CREATE TABLE tb_box
     image     BYTEA,
     CONSTRAINT pk_tb_box PRIMARY KEY (id)
 );
+
+CREATE TABLE tb_box_products
+(
+    box_id       BIGINT NOT NULL,
+    product_name VARCHAR(255)
+);
+
+ALTER TABLE tb_box_products
+    ADD CONSTRAINT fk_tb_box_products_on_box FOREIGN KEY (box_id) REFERENCES tb_box (id);
