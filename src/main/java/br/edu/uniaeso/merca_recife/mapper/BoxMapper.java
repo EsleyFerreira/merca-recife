@@ -2,7 +2,8 @@ package br.edu.uniaeso.merca_recife.mapper;
 
 import br.edu.uniaeso.merca_recife.dto.BoxDTO;
 import br.edu.uniaeso.merca_recife.entity.Box;
-import br.edu.uniaeso.merca_recife.entity.Market;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class BoxMapper {
 
@@ -16,6 +17,7 @@ public class BoxMapper {
             dto.setMarketId(box.getMarket().getId());
         }
         dto.setImage(box.getImage());
+        dto.setProducts(box.getProducts() != null ? new ArrayList<>(box.getProducts()) : Collections.emptyList());
         return dto;
     }
 
@@ -25,12 +27,8 @@ public class BoxMapper {
         }
         Box box = new Box();
         box.setId(dto.getId());
-        if (dto.getMarketId() != null) {
-            Market market = new Market();
-            market.setId(dto.getMarketId());
-            box.setMarket(market);
-        }
         box.setImage(dto.getImage());
+        box.setProducts(dto.getProducts() != null ? new ArrayList<>(dto.getProducts()) : Collections.emptyList());
         return box;
     }
 }
