@@ -1,6 +1,8 @@
 package br.edu.uniaeso.merca_recife.entity;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_box")
@@ -16,6 +18,14 @@ public class Box {
 
     @Column(columnDefinition = "BYTEA")
     private byte[] image;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "tb_box_products", joinColumns = @JoinColumn(name = "box_id"))
+    @Column(name = "product_name")
+    private List<String> products = new ArrayList<>();
+
+    public Box() {
+    }
 
     public Long getId() {
         return id;
@@ -39,5 +49,13 @@ public class Box {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public List<String> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<String> products) {
+        this.products = products;
     }
 }
