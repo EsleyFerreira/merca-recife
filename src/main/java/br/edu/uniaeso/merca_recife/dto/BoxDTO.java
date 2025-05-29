@@ -1,17 +1,22 @@
 package br.edu.uniaeso.merca_recife.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BoxDTO {
 
     private Long id;
     private Long marketId;
     private byte[] image;
+    private List<String> products = new ArrayList<>();
 
     public BoxDTO() {}
 
-    public BoxDTO(Long id, Long marketId, byte[] image) {
+    public BoxDTO(Long id, Long marketId, byte[] image, List<String> products) {
         this.id = id;
         this.marketId = marketId;
         this.image = image;
+        this.products = products;
     }
 
     public Long getId() {
@@ -36,5 +41,13 @@ public class BoxDTO {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public List<String> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<String> products) {
+        this.products = products;
     }
 }
