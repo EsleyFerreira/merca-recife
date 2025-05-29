@@ -44,7 +44,6 @@ public class Merchant {
         this.ownedBoxes = ownedBoxes;
     }
 
-
     public String getName() {
         return name;
     }
