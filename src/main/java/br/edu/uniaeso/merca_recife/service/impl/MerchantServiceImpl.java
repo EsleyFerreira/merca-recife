@@ -2,6 +2,7 @@ package br.edu.uniaeso.merca_recife.service.impl;
 
 import br.edu.uniaeso.merca_recife.entity.Merchant;
 import br.edu.uniaeso.merca_recife.repository.MerchantRepository;
+import br.edu.uniaeso.merca_recife.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MerchantServiceImpl implements br.edu.uniaeso.merca_recife.service.MerchantService {
+public class MerchantServiceImpl implements MerchantService {
 
     @Autowired
     private MerchantRepository merchantRepository;
