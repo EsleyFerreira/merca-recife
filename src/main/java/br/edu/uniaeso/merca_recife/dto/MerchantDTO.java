@@ -1,6 +1,4 @@
 package br.edu.uniaeso.merca_recife.dto;
-
-import jakarta.validation.constraints.Email;
 import java.util.List;
 
 public class MerchantDTO {
@@ -8,8 +6,6 @@ public class MerchantDTO {
     private Long id;
     private String name;
     private String cpf;
-
-    @Email
     private String email;
     private String contact;
     private boolean approved;
