@@ -18,12 +18,6 @@ Merca Recife é uma API Java Spring Boot para gerenciamento de comerciantes, mer
 
 ## Getting Started
 
-### Prerequisites
-
-- Java 21+
-- Maven
-- Docker & Docker Compose
-
 ### Running Locally
 
 1. **Clone the repository:**
